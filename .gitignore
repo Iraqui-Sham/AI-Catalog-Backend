@@ -4,6 +4,22 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Environment files (SECRET DATA)
+.env
+.env.*
+
+# Application config (if contains secrets)
+application.properties
+application.yml
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
 ### STS ###
 .apt_generated
 .classpath
@@ -12,6 +28,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+application.properties
 
 ### IntelliJ IDEA ###
 .idea
