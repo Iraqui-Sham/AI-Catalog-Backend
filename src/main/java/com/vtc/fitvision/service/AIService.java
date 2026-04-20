@@ -27,7 +27,7 @@ public class AIService {
         HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(
-                "http://localhost:9000/generate",
+                "http://localhost:8000/generate",
                 request,
                 String.class
         );
