@@ -13,6 +13,11 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+    
+    @PostMapping("/google")
+    public ResponseEntity<?> googleLogin(@RequestBody User user) {
+        return ResponseEntity.ok(authService.googleLogin(user));
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {

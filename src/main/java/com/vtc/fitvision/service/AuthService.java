@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 @Service
 public class AuthService {
 
@@ -18,6 +22,28 @@ public class AuthService {
 
     @Autowired
     private JwtUtil jwtUtil;
+    
+    public Map<String, Object> googleLogin(User user) {
+
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+
+        User dbUser;
+
+        if (existingUser.isPresent()) {
+            dbUser = existingUser.get();
+        } else {
+            user.setCredits(100);
+            dbUser = userRepository.save(user);
+        }
+
+        String token = jwtUtil.generateToken(dbUser.getEmail());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("user", dbUser);
+
+        return response;
+    }
 
     public String register(User user) {
 
